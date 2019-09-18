@@ -21,107 +21,106 @@ flags:
 
 ghc-options: -Wall -fwarn-tabs -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -O2
 
-dependencies:
-# Meaningful constraints.
-  - base >=4.7 && <5
+# dependencies:
+# # Meaningful constraints.
+#   - base >=4.7 && <5
 
-  # Core package tightly packaged to this package
-  - store-core >=0.4 && <0.5
+#   # Core package tightly packaged to this package
+#   - store-core >=0.4 && <0.5
 
-  # Utilities package tightly coupled to the TH code
-  - th-utilities >=0.2
+#   # Utilities package tightly coupled to the TH code
+#   - th-utilities >=0.2
 
-  # Due to removal of 'internal' from MonadPrim in 0.6
-  - primitive >=0.6
+#   # Due to removal of 'internal' from MonadPrim in 0.6
+#   - primitive >=0.6
 
-  # Due to behavior change for reification errors
-  - th-reify-many >=0.1.6
+#   # Due to behavior change for reification errors
+#   - th-reify-many >=0.1.6
 
-# "Just cuz" constraints. These are the package versions we use in the 7.8
-# config. Many of these bounds can be much lower, most aren't even necessary.
-# Added to appease at least the lower part of the PvP
-  - array >=0.5.0.0
-  - base-orphans >=0.4.3
-  - base64-bytestring >= 0.1.1
-  - bytestring >=0.10.4.0
-  - containers >=0.5.5.1
-  - cryptohash >=0.11.6
-  - deepseq >=1.3.0.2
-  - directory >= 1.2
-  - filepath >= 1.3
-  - ghc-prim >=0.3.1.0
-  - hashable >=1.2.3.1
-  - hspec >=2.1.2
-  - hspec-smallcheck >=0.3.0
-  - integer-gmp >=0.5.1.0
-  - lifted-base >=0.2.3.3
-  - monad-control >=0.3.3.0
-  - mono-traversable >=0.7.0
-  - resourcet >=1.1.3.3
-  - safe >=0.3.8
-  - semigroups >=0.8
-  - smallcheck >=1.1.1
-  - syb >=0.4.4
-  - template-haskell >=2.9.0.0
-  - text >=1.2.0.4
-  - th-lift >=0.7.1
-  - th-lift-instances >=0.1.4
-  - th-orphans >= 0.12.2
-  - time >=1.4.2
-  - transformers >=0.3.0.0
-  - unordered-containers >=0.2.5.1
-  - vector >=0.10.12.3
-  - void >=0.5.11
-  - free >=4.11
-  - network >=2.6.0.2
-  - async >=2.0.2
-  - contravariant >=1.3
-  - bifunctors >=4.0
+# # "Just cuz" constraints. These are the package versions we use in the 7.8
+# # config. Many of these bounds can be much lower, most aren't even necessary.
+# # Added to appease at least the lower part of the PvP
+#   - array >=0.5.0.0
+#   - base-orphans >=0.4.3
+#   - base64-bytestring >= 0.1.1
+#   - bytestring >=0.10.4.0
+#   - containers >=0.5.5.1
+#   - cryptohash >=0.11.6
+#   - deepseq >=1.3.0.2
+#   - directory >= 1.2
+#   - filepath >= 1.3
+#   - ghc-prim >=0.3.1.0
+#   - hashable >=1.2.3.1
+#   - hspec >=2.1.2
+#   - hspec-smallcheck >=0.3.0
+#   - integer-gmp >=0.5.1.0
+#   - lifted-base >=0.2.3.3
+#   - monad-control >=0.3.3.0
+#   - mono-traversable >=0.7.0
+#   - safe >=0.3.8
+#   - semigroups >=0.8
+#   - smallcheck >=1.1.1
+#   - syb >=0.4.4
+#   - template-haskell >=2.9.0.0
+#   - text >=1.2.0.4
+#   - th-lift >=0.7.1
+#   - th-lift-instances >=0.1.4
+#   - th-orphans >= 0.12.2
+#   - time >=1.4.2
+#   - transformers >=0.3.0.0
+#   - unordered-containers >=0.2.5.1
+#   - vector >=0.10.12.3
+#   - void >=0.5.11
+#   - free >=4.11
+#   - network >=2.6.0.2
+#   - async >=2.0.2
+#   - contravariant >=1.3
+#   - bifunctors >=4.0
 library:
   source-dirs: src
   other-modules:
     - Data.Store.Impl
 
-tests:
-  store-test:
-    source-dirs: test
-    main: Spec.hs
-    other-modules:
-      - Data.Store.UntrustedSpec
-      - Data.StoreSpec
-      - Data.StoreSpec.TH
-      - System.IO.ByteBufferSpec
-    ghc-options: -threaded -rtsopts -with-rtsopts=-N
-    dependencies:
-      - store
-  store-weigh:
-    source-dirs: test
-    main: Allocations.hs
-    other-modules: []
-    ghc-options: -threaded -rtsopts -with-rtsopts=-N -with-rtsopts=-T -O2
-    dependencies:
-      - store
-      - weigh
-      - criterion
-      - cereal
-      - cereal-vector
-      - vector-binary-instances
+# tests:
+#   store-test:
+#     source-dirs: test
+#     main: Spec.hs
+#     other-modules:
+#       - Data.Store.UntrustedSpec
+#       - Data.StoreSpec
+#       - Data.StoreSpec.TH
+#       - System.IO.ByteBufferSpec
+#     ghc-options: -threaded -rtsopts -with-rtsopts=-N
+#     dependencies:
+#       - store
+#   store-weigh:
+#     source-dirs: test
+#     main: Allocations.hs
+#     other-modules: []
+#     ghc-options: -threaded -rtsopts -with-rtsopts=-N -with-rtsopts=-T -O2
+#     dependencies:
+#       - store
+#       - weigh
+#       - criterion
+#       - cereal
+#       - cereal-vector
+#       - vector-binary-instances
 
-benchmarks:
-  store-bench:
-    source-dirs: bench
-    main: Bench.hs
-    ghc-options: -threaded -rtsopts -with-rtsopts=-N1 -with-rtsopts=-s -with-rtsopts=-qg
-    dependencies:
-      - criterion
-      - store
-    when:
-      - condition: flag(comparison-bench)
-        dependencies:
-          - cereal
-          - binary
-          - vector-binary-instances
-          - cereal-vector
-        cpp-options: -DCOMPARISON_BENCH
-      - condition: flag(small-bench)
-        cpp-options: -DSMALL_BENCH
+# benchmarks:
+#   store-bench:
+#     source-dirs: bench
+#     main: Bench.hs
+#     ghc-options: -threaded -rtsopts -with-rtsopts=-N1 -with-rtsopts=-s -with-rtsopts=-qg
+#     dependencies:
+#       - criterion
+#       - store
+#     when:
+#       - condition: flag(comparison-bench)
+#         dependencies:
+#           - cereal
+#           - binary
+#           - vector-binary-instances
+#           - cereal-vector
+#         cpp-options: -DCOMPARISON_BENCH
+#       - condition: flag(small-bench)
+#         cpp-options: -DSMALL_BENCH
