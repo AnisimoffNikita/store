@@ -370,7 +370,7 @@ spec = do
             , [t| A.UArray Char Bool |]
             ])
     it "Slices roundtrip" $ do
-        -- assertRoundtrip False $ T.drop 3 $ T.take 3 "Hello world!"
+        assertRoundtrip False $ T.drop 3 $ T.take 3 "Hello world!"
         assertRoundtrip False $ BS.drop 3 $ BS.take 3 "Hello world!"
         assertRoundtrip False $ SV.drop 3 $ SV.take 3 (SV.fromList [1..10] :: SV.Vector Int32)
         assertRoundtrip False $ UV.drop 3 $ UV.take 3 (UV.fromList [1..10] :: UV.Vector Word8)

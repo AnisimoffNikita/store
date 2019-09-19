@@ -103,11 +103,6 @@ import           Data.Store.Impl
 import           Data.Store.Core
 import           Data.Store.TH.Internal
 import qualified Data.Text as T
-#ifndef ghcjs_HOST_OS
-import qualified Data.Text.Array as TA
-import qualified Data.Text.Foreign as T
-import qualified Data.Text.Internal as T
-#endif
 import qualified Data.Time as Time
 import           Data.Typeable (Typeable)
 import qualified Data.Vector as V
@@ -417,25 +412,12 @@ instance Store LBS.ByteString where
     poke = poke . LBS.toStrict
     peek = fmap LBS.fromStrict peek
 
-#ifndef ghcjs_HOST_OS
+-- | Special instance for reflex-platform, bacause reflex-platform uses
+-- JSString for Text rather than the usual internal implementation.
 instance Store T.Text where
-    size = VarSize $ \x ->
-        sizeOf (undefined :: Int) +
-        2 * (T.lengthWord16 x)
-    poke x = do
-        let !(T.Text (TA.Array array) w16Off w16Len) = x
-        poke w16Len
-        pokeFromByteArray array (2 * w16Off) (2 * w16Len)
-    peek = do
-        w16Len <- peek
-        ByteArray array <- peekToByteArray "Data.Text.Text" (2 * w16Len)
-        return (T.Text (TA.Array array) 0 w16Len)
-#else
-instance Store T.Text where
-    size = T.unpack <$> size
+    size = contramap T.unpack size
     poke = poke . T.unpack
-    peek = T.unpack <$> size
-#endif
+    peek = T.pack <$> peek
 
 ------------------------------------------------------------------------
 -- Known size instances
